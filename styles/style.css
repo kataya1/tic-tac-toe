@@ -1,0 +1,43 @@
+:root{
+    --boxes: 3;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
+body {
+    font-family: 'Short Stack', cursive;
+    }
+
+html,body{
+    min-height: 100vh;
+}
+
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+main{
+
+    width: min(90vw, 400px);
+    height: min(90vw, 400px);
+
+}
+#gameBoard{
+    width: inherit;
+    height: inherit;
+    display: grid;
+    border-width: 10px;
+    grid-template-columns: repeat(var(--boxes), 1fr);
+    grid-template-rows: repeat(var(--boxes), 1fr);
+}
+
+.boardCell{
+
+
+}
+.boardCell:hover:not(.filled){
+    cursor: pointer;
+    filter: opacity(0.2)
+}
