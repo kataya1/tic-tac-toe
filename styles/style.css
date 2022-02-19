@@ -1,5 +1,10 @@
 :root{
     --boxes: 3;
+    --font-color: black;
+    --background-color: white;
+    --border-width: 10px;
+    --hover-color: #eee
+
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
@@ -22,22 +27,45 @@ main{
 
     width: min(90vw, 400px);
     height: min(90vw, 400px);
-
+    margin: auto;
+    
 }
 #gameBoard{
     width: inherit;
     height: inherit;
+    padding: 1rem;
+
+    background-color: var(--background-color);
+
     display: grid;
-    border-width: 10px;
+    gap: 1px;
     grid-template-columns: repeat(var(--boxes), 1fr);
     grid-template-rows: repeat(var(--boxes), 1fr);
 }
-
-.boardCell{
-
-
+.gameCell{
+    display: inline-block;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
 }
-.boardCell:hover:not(.filled){
+.border-bottom{
+    border-bottom: var(--border-width) dotted var(--font-color);
+}
+.border-right{
+    border-right: var(--border-width) groove  var(--font-color);
+}
+.border-top{
+    border-top: var(--border-width) dotted  var(--font-color);
+}
+.border-left{
+    border-left: var(--border-width) dashed  var(--font-color);
+    
+}
+.gameCell:hover:not(.filled){
     cursor: pointer;
-    filter: opacity(0.2)
+    background: var(--hover-color)
 }
