@@ -1,80 +1,149 @@
 
-// main
-(()=>{
+type symbols = 'X' | 'O' | ' '
+type matrix = symbols[][]
+type move  = [number, number]  // tuple
 
-type matrix = string[][]
-type gridSize = 3 | 5 | 7 
-let gameBoardSize: gridSize = 7
 
-// module
-const gameBoard = ((len: gridSize = 3) =>{
-    let arr2d = Array(len).fill(null).map(()=> Array(len).fill(null))
-    return { arr2d, len }
-})(gameBoardSize)
+class GameBoard{
+    moveSequence: move[];
+    arr2d: matrix;
+    len: number;
+    constructor(len: number){
+        this.len = len
+        this.moveSequence = []
+        this.arr2d = Array(len).fill(null).map(()=> Array(len).fill(" "))
+    }
+}
+
+
+interface Player{
+    name:string;
+    symbol: symbols;
+    score: number,
+}
+
 
 // factory 
-const player = (name: string, sympol: string ) => {
-    return { name, sympol } 
+const makePlayer = (name: string, symbol: symbols ): Player => {
+    let score: number = 0;
+
+    return { name, score, symbol } 
+
 }
 
 
 
 
 // module
-const renderController = ((gameBoard, htmlboard: HTMLDivElement)=>{
+const renderController = ((htmlboard: HTMLDivElement)=>{
     let root = document.querySelector(":root")! as HTMLElement
-    const initGameBoard = () => {
+    // don't know if this is useful
+    let div2dArray: HTMLDivElement[][];
+    const initGameBoard = (gameBoard: GameBoard ) => {
+        htmlboard.innerHTML = ''
+        div2dArray =  Array(gameBoard.len).fill(null).map(()=> Array(gameBoard.len).fill(" "));
+        
+        // htmlboard.innerHTML = ''
         root.style.setProperty('--boxes',`${gameBoard.len}`)
         gameBoard.arr2d.map((row, rowIndex)=>{ row.map((content, colIndex)=>{
             let div = document.createElement('div')
+            //classlist 
             let cl: string[] = ['gameCell', 'doodle-border']
             if (rowIndex !== gameBoard.len - 1)  cl.push('border-bottom')
             if (colIndex !== gameBoard.len - 1)  cl.push('border-right')
             if (colIndex !== 0)  cl.push('border-left')
             if (rowIndex !== 0)  cl.push('border-top')
             div.classList.add(...cl)
-            document.addEventListener('click', renderController.playerClick)
-            div.textContent = `${content || ""}`
+
+            div.setAttribute('rowIndex', rowIndex.toString())
+            div.setAttribute('colIndex', colIndex.toString())
+            
+            div.addEventListener('click', renderController.playerClick)
+            div.textContent = `${content ?? ' '}`
+            
+            div2dArray[rowIndex][colIndex] = div
+
             htmlboard.appendChild(div)
         })})
+
     }
 
     const playerClick = (e: Event) => {
         e.preventDefault()
         e.stopPropagation()
-        gameController.playerClick(e)
+        gameController.playerClick(
+            +(e.target! as Element).getAttribute('rowindex')!,
+            +(e.target! as Element).getAttribute('colindex')!
+            )
     }
 
+    const tilePaint = (rowIndex: number, colIndex: number, symbol: symbols) => {
+        let div = div2dArray[rowIndex][colIndex]
+        div.innerText = symbol
+        div.classList.add('filled')
+    }
 
-    return { initGameBoard, playerClick }
-})(gameBoard, document.querySelector('#gameBoard')! as HTMLDivElement);
+    return { initGameBoard, playerClick, tilePaint }
+})(document.querySelector('#gameBoard')! as HTMLDivElement);
 
+// module
 const gameController = (()=>{
-    let p1 = player('bob', 'X')
-    let p2 = player('sally', 'O')
-    let startingPlayer = p1
-    let turn;
+    let firstTurnPlayer: Player;
+    let players: Player[] = [];
+    let turn: number;
+    let moveNumber: number;
+    let gameBoard: GameBoard;
+    let gameBoardSize: number;
     const setup = () =>{
-        renderController.initGameBoard()
+        gameBoardSize = 5;
+        players.push(makePlayer('p1', 'X'))
+        players.push(makePlayer('p2', 'O')) 
+        newGame()
     }
-    const start = () => {
 
-    }
     
     const play = () => {
         
         return 0
     }
-
-    const playerClick = (e: Event)=> {
-        console.log({e})
+    const nextTurn = () =>{
+        turn = (turn + 1 ) % players.length
+    }
+    const playerClick = (rowIndex: number, colIndex: number)=> {
         
+        if (gameBoard.arr2d[rowIndex][colIndex] === " "){
+            gameBoard.arr2d[rowIndex][colIndex] = players[turn].symbol
+            gameBoard.moveSequence.push([rowIndex, colIndex])
+            renderController.tilePaint(rowIndex, colIndex, players[turn].symbol )
+            nextTurn()
+        }
+
+        
+    }
+
+    const newGame = () => {
+        gameBoard = new GameBoard(gameBoardSize)
+        renderController.initGameBoard(gameBoard)
+        moveNumber = 0
+        // first game? index = 0
+        // this switches between who starts 
+        // made this way so we can have players in the future
+        firstTurnPlayer = players[players.indexOf(firstTurnPlayer) + 1 % players.length]
+        // who plays after 
+        turn = players.indexOf(firstTurnPlayer)
+    }
+    const checkWin = ()=>{
+
     }
     return { play, setup, playerClick }
 })();
 
 
-    gameController.setup()
+// main
+(()=>{
+// let p1 = makeplayer('bob', 'X')
+// let p2 = player('sally', 'O')
+gameController.setup()
     
     
 })()
