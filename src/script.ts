@@ -3,6 +3,17 @@ type symbols = 'X' | 'O' | ' '
 type matrix = symbols[][]
 type move  = [number, number]  // tuple
 
+// the plyer is gonna go to the website 
+    // grid is init with rows and cols 3 
+    // there will be a slider that have 
+    // (grid_size 3, 4, .., n)
+    // p1( player - bot) ,
+    // p2 ( player - bot [bot_Strength, bot_speed, ])
+    // add player (you can have many)
+    // win condition ( 3, 4, 5, ... grid_size)   ex: grid_size: 5  win-condition: 4
+    // newGamebutton
+    // undo button
+
 
 class GameBoard{
     moveSequence: move[];
