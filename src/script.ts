@@ -13,6 +13,8 @@ type move  = [number, number]  // tuple
     // win condition ( 3, 4, 5, ... grid_size)   ex: grid_size: 5  win-condition: 4
     // newGamebutton
     // undo button
+    // changing grid size or win condition or adding players  will start a new game (get's a warning)
+    // changing from a player to a bot or vice versa
 
 
 class GameBoard{
@@ -130,6 +132,9 @@ const gameController = (()=>{
         }
 
         
+    }
+    const whoseTurn = () => {
+        return players[turn]
     }
 
     const newGame = () => {
