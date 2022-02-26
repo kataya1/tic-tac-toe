@@ -15,7 +15,8 @@ type move  = [number, number]  // tuple
     // undo button
     // changing grid size or win condition or adding players  will start a new game (get's a warning)
     // changing from a player to a bot or vice versa
-
+    // find win algorithm is hard in case of big grid size and different wind condition ex( grid 5 win 4 )
+    // possible soloution to the checkWin is like a graph traversal 
 
 class GameBoard{
     moveSequence: move[];
@@ -25,6 +26,9 @@ class GameBoard{
         this.len = len
         this.moveSequence = []
         this.arr2d = Array(len).fill(null).map(()=> Array(len).fill(" "))
+    }
+    checkWin(){
+        return false
     }
 }
 
