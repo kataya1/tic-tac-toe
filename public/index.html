@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tictactoe</title>
-    <link rel="stylesheet" href="../styles/DoodleCSS-main/doodle.css">
-    <link rel="stylesheet" href="../styles/style.css">
-
-    
 
 </head>
+
 <body class="doodle">
 
-    <main>
+    <header id="players-overlay" >
+        <label for="p1" class="player_name">
+            <input type="radio" name="players" id="p1">
+            p1
+        </label>
+        <label for="p1"> <input type="radio" name="players" id="p3"><span class="player_name">p3</span></label>
+        <label for="p1"><input type="radio" name="players" id="p2"><span class="player_name">p2</span></label>
+    </header>
+    <main id="gameBoard-container">
         <div id="gameBoard" class="">
         </div>
     </main>
     <aside>
 
     </aside>
-    <script src="script.js"></script>
+    <script src="bundle.js"></script>
 
 </body>
 

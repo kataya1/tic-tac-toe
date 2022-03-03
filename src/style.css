@@ -1,0 +1,129 @@
+:root{
+    --boxes: 3;
+    --font-color: #111;
+    --background-color: white;
+    --cell-font-size: 0;
+    --border-width: 10px;
+    --hover-color: #eee;
+    --next-turn-symbol: "X";
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Short+Stack&display=swap');
+@import "~doodle.css/doodle.css";
+body {
+    font-family: 'Short Stack', cursive;
+    }
+
+html,body{
+    min-height: 100vh;
+}
+
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+#gameBoard-container{
+
+    width: min(90vw, 400px);
+    height: min(90vw, 400px);
+    margin: auto;
+    
+    display: grid;
+}
+#gameBoard{
+    width: inherit;
+    height: inherit;
+    padding: 1rem;
+
+    background-color: var(--background-color);
+
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(var(--boxes), 1fr);
+    grid-template-rows: repeat(var(--boxes), 1fr);
+}
+.gameCell{
+
+    display: table-cell;
+    font-size: var(--cell-font-size);
+    user-select: none;
+    line-height: 100%;
+    vertical-align: middle ;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+
+    text-align: center;
+}
+.border-bottom{
+    border-bottom: var(--border-width) dotted var(--font-color);
+}
+.border-right{
+    border-right: var(--border-width) groove  var(--font-color);
+}
+.border-top{
+    border-top: var(--border-width) dotted  var(--font-color);
+}
+.border-left{
+    border-left: var(--border-width) dashed  var(--font-color);
+}
+.gameCell:not(.border-top), .gameCell:not(.border-top)::before{
+    padding-top: calc(var(--border-width) );
+}
+.gameCell:not(.border-right), .gameCell:not(.border-right)::before{
+    padding-right: calc(var(--border-width) - 4px);
+}
+.gameCell:not(.border-left), .gameCell:not(.border-left)::before{
+    padding-left: calc(var(--border-width) - 4px);
+}
+.gameCell:not(.border-bottom), .gameCell:not(.border-bottom){
+    padding-bottom: calc(var(--border-width) - 4px);
+}
+.gameCell:hover:not(.filled){
+    position: relative;
+    cursor: pointer;
+    background: var(--hover-color);
+    
+}
+.gameCell:hover:not(.filled)::before{
+    
+    line-height: 100%;
+    font-size: var(--cell-font-size);
+    display: inline-block;
+    text-align: center;
+    content: var(--next-turn-symbol);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: gray;
+}
+
+
+/* player overlay */
+#players-overlay{
+    
+    padding: 5vh 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#players-overlay label{
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+}
+#players-overlay label {
+    pointer-events: none;
+}
+
+.player_name{
+    font-size: 1.3em;
+    margin-left: 5px
+}
