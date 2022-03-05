@@ -10,18 +10,25 @@
 </head>
 
 <body class="doodle">
-
-    <header id="players-overlay" >
-        <label for="p1" class="player_name">
-            <input type="radio" name="players" id="p1">
-            p1
-        </label>
-        <label for="p1"> <input type="radio" name="players" id="p3"><span class="player_name">p3</span></label>
-        <label for="p1"><input type="radio" name="players" id="p2"><span class="player_name">p2</span></label>
-    </header>
-    <main id="gameBoard-container">
-        <div id="gameBoard" class="">
-        </div>
+    <main id="main-content">
+        <header>
+            <div id="players-overlay" class="d-flex">
+                <label for="p1" class="player_name">
+                    <input type="radio" name="players" id="p1">
+                    p1
+                </label>
+                <label for="p1"> <input type="radio" name="players" id="p3"><span class="player_name">p3</span></label>
+                <label for="p1"><input type="radio" name="players" id="p2"><span class="player_name">p2</span></label>
+            </div> 
+        </header>
+        <main id="gameBoard-container">
+            <div id="gameBoard" class="">
+            </div>
+        </main>
+    
+        <footer>
+            <button type="button" id="NewGame-button" class="hidden">New Game</button>
+        </footer>
     </main>
     <aside>
 
