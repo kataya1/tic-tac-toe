@@ -29,12 +29,11 @@ enum GameState {
     undecided,
 }
 
-// module
 
 
-const sympolArray: symbols[] = [ '8', 'Z', "H", "I", "O", "X"]
 // module
 export const gameController = (() => {
+    const sympolArray: symbols[] = [ '8', 'Z', "H", "I", "O", "X"]
     let firstTurnPlayer: Player; // the player that starts in a new game changes with everygame
     let players: Player[] = [];
     let turn: number;  // 0 to players.lengths
