@@ -32,7 +32,7 @@ enum GameState {
 // module
 
 
-const sympolArray: symbols[] = ["H", "I", "O", "X"]
+const sympolArray: symbols[] = [ '8', 'Z', "H", "I", "O", "X"]
 // module
 export const gameController = (() => {
     let firstTurnPlayer: Player; // the player that starts in a new game changes with everygame
@@ -45,9 +45,9 @@ export const gameController = (() => {
     const setup = () => {
         gameBoardSize = 3;
         winCondition = 3;
-        addPlayer("p1");
+        addPlayer("Min");
         addPlayer("Max");
-        addPlayer("jinx");
+
         newGame();
     };
 
@@ -116,7 +116,8 @@ export const gameController = (() => {
     };
 
     const addPlayer = (name: string) => {
-        players.push(playerFactory(name, sympolArray.pop() ?? " "));
+        if(sympolArray.length !== 0)
+            players.push(playerFactory(name, sympolArray.pop() ?? " "));
     };
 
     const removePlayer = (player: Player) => {

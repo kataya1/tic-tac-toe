@@ -81,7 +81,7 @@ export const renderController = ((htmlboard: HTMLDivElement) => {
             inpt.setAttribute('id', `radio-${player.playerId}`)
             if(index === currentTurn) inpt.setAttribute('checked', "true")  
             spn.classList.add('player_name')
-            spn.appendChild(document.createTextNode(`${player.name}`))
+            spn.appendChild(document.createTextNode(`${player.name} [ ${player.symbol} ]`))
             label.appendChild(inpt)
             label.appendChild(spn)
             playersOverlayDiv.appendChild(label)

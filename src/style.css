@@ -1,11 +1,13 @@
 :root{
     --boxes: 3;
     --font-color: #111;
-    --background-color: white;
+    --grid-bgc-clr: white;
+    --main-cnt-bgc-clr: white;
     --cell-font-size: 0;
     --border-width: 10px;
     --hover-color: #eee;
     --next-turn-symbol: "X";
+    --radio-star-clr: crimson;
 
 }
 
@@ -30,6 +32,7 @@ html,body{
     height: 99vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    background-color: var(--main-cnt-bgc-clr);
 }
 #gameBoard-container{
 
@@ -44,7 +47,7 @@ html,body{
     height: inherit;
     padding: 1rem;
 
-    background-color: var(--background-color);
+    background-color: var(--grid-bgc-clr);
 
     display: grid;
     gap: 1px;
@@ -125,24 +128,30 @@ html,body{
     display:flex;
 }
 /* player overlay */
-#players-overlay, #win-flash{
+#players-overlay{
     line-height: 100%;
-    height: 2ch;
+    min-height: 1.5em;
     margin: 5vh 1vw;
     font-size: 1.5rem;
     flex-direction: row;
     justify-content: space-evenly;
+    align-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 #players-overlay label{
+
+    padding: 0 1rem;
     display: inline-flex;
     align-items: center;
 }
 #players-overlay label {
     pointer-events: none;
 }
-
+#players-overlay label input[type="radio"]:checked::after{
+    color: var(--radio-star-clr);
+}
 .player_name{
     
     margin-left: 5px
@@ -162,5 +171,5 @@ footer{
     background-color: var(--hover-color);
 }
 #NewGame-button:active{
-    background-color: var(--background-color);
+    background-color: var(--grid-bgc-clr);
 }

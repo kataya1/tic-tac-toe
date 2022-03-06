@@ -36,7 +36,7 @@ export default class GameBoard {
             if (this.arr2d[rowIndex][i] === symbol) counter++
             else break
         }
-        return (counter === this.winCondition) 
+        return (counter >= this.winCondition) 
         
     }
     private _checkvertical(rowIndex: number, colIndx: number, symbol: symbols){
@@ -49,9 +49,52 @@ export default class GameBoard {
             if (this.arr2d[i][colIndx] === symbol) counter++
             else break
         }
-        return (counter === this.winCondition) 
+        return (counter >= this.winCondition) 
         
     }
+
+    
+    private _checkDiagonal45deg(rowIndex: number, colIndex: number, symbol: symbols){
+        let counter = 1
+        //up right
+        for (let i = 1; i < this.len - colIndex  && i < rowIndex + 1 ; i++){
+            if( this.arr2d[rowIndex - i][colIndex + i] === symbol) counter++;
+            else break;
+        }
+        // down left
+        for (let i = rowIndex + 1, j = colIndex - 1 ; i < this.len && j >= 0; i++, j--){
+            if(this.arr2d[i][j] === symbol)  counter++;
+            else break;
+        }
+        return counter >= this.winCondition
+      
+    }
+    private _checkDiagonal135deg(rowIndex: number, colIndex: number, symbol: symbols){
+        let counter = 1
+        //up left
+        for( let i = rowIndex - 1, j = colIndex - 1; i >= 0 && j>= 0; i--, j--){
+            if (this.arr2d[i][j] === symbol) counter++;
+            else break;
+        }
+        //down right
+        for( let i = rowIndex + 1, j= colIndex + 1; i < this.len && colIndex< this.len; i++, j++ ){
+            if (this.arr2d[i][j] === symbol) counter++;
+            else break;
+        }
+        return counter >= this.winCondition
+    }
+    private _4corners(rowIndex: number, colIndex: number, symbol: symbols){
+        return (this.winCondition === 4)
+        ?  
+            (
+                this.arr2d[0][0] === symbol &&
+                this.arr2d[0][this.len -1] === symbol &&
+                this.arr2d[this.len - 1][0] === symbol &&
+                this.arr2d[this.len - 1][this.len -1] === symbol
+            )
+        : false
+    }
+    
     checkWinPostClick(): boolean {
         let [rowIndex, colIndex] = this.moveSequence[this.moveSequence.length - 1]
         if (rowIndex >= this.len || rowIndex < 0 || colIndex >= this.len || colIndex < 0)
@@ -60,7 +103,9 @@ export default class GameBoard {
         let inpt: [number, number, symbols] = [rowIndex, colIndex, symbol]
         let horiWin = this._checkHorizontal(...inpt)
         let verticalWin = this._checkvertical(...inpt)
-
-        return horiWin || verticalWin;
+        let diagonal45Win = this._checkDiagonal45deg(...inpt)
+        let diagonal135Win = this._checkDiagonal135deg(...inpt)
+        let croners4Win = this._4corners(...inpt)
+        return horiWin || verticalWin || diagonal135Win || diagonal45Win || croners4Win;
     }
 }
