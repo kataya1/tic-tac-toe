@@ -29,10 +29,10 @@ html,body{
 }
 
 #main-content{
-    height: 99vh;
+    background-color: var(--main-cnt-bgc-clr);
+    min-height: inherit;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    background-color: var(--main-cnt-bgc-clr);
 }
 #gameBoard-container{
 
