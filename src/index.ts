@@ -42,8 +42,8 @@ export const gameController = (() => {
     let gameBoardSize: number;
     let winCondition: number;
     const setup = () => {
-        gameBoardSize = 3;
-        winCondition = 3;
+        gameBoardSize = 5;
+        winCondition = 4;
         addPlayer("Min");
         addPlayer("Max");
 
@@ -63,7 +63,7 @@ export const gameController = (() => {
         let text: string;
         switch(state){
             case 1:
-                text = `${currentTurnPlayer().name} Won the Game`
+                text = `${currentTurnPlayer().name} [ ${currentTurnPlayer().symbol} ] Won the Game`
                 break;
             case 2:
                 text = "It's a Draw"

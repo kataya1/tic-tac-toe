@@ -46,7 +46,6 @@ html,body{
     width: inherit;
     height: inherit;
     padding: 1rem;
-
     background-color: var(--grid-bgc-clr);
 
     display: grid;
@@ -95,7 +94,7 @@ html,body{
 .gameCell:hover:not(.filled){
     position: relative;
     cursor: pointer;
-    background: var(--hover-color);
+    /* background: var(--hover-color); */
     
 }
 .gameCell:hover:not(.filled)::before{
