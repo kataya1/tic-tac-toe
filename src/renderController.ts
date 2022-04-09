@@ -1,4 +1,4 @@
-import { gameController } from './script'
+import { gameController } from './index'
 import GameBoard from './gameBoard';
 import { symbols } from './types';
 import { Player } from './intefaces';
@@ -55,13 +55,13 @@ export const renderController = ((htmlboard: HTMLDivElement) => {
         let cStyle = window.getComputedStyle(div)
         let fntSz = +cStyle.getPropertyValue('height').slice(0,-2) - +cStyle.getPropertyValue('--border-width').slice(0,-2) * 2
         root.style.setProperty('--cell-font-size', `${fntSz}px`) 
-        console.log({nextTurnSympol})
+        
     
         root.style.setProperty('--next-turn-symbol', `"${nextTurnSympol}"`) 
     
         
-        console.log(root.style.getPropertyValue('--cell-font-size'))
-        console.log(root.style.getPropertyValue('--next-turn-symbol'))
+        
+        
         div.innerText = symbol;
         div.classList.add("filled");
     };
@@ -94,7 +94,7 @@ export const renderController = ((htmlboard: HTMLDivElement) => {
         // it changes the radio of the current player to checked 
         PlayersRadioArr[index].setAttribute('checked', 'checked')
         PlayersRadioArr[oldIndex].removeAttribute('checked')
-        console.log(PlayersRadioArr[oldIndex])
+        
     }
     const newGame = (e: Event) =>{
         e.preventDefault()

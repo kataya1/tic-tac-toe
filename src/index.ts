@@ -42,8 +42,8 @@ export const gameController = (() => {
     let gameBoardSize: number;
     let winCondition: number;
     const setup = () => {
-        gameBoardSize = 3;
-        winCondition = 3;
+        gameBoardSize = 5;
+        winCondition = 4;
         addPlayer("Min");
         addPlayer("Max");
 
@@ -63,7 +63,7 @@ export const gameController = (() => {
         let text: string;
         switch(state){
             case 1:
-                text = `${currentTurnPlayer().name} Won the Game`
+                text = `${currentTurnPlayer().name} [ ${currentTurnPlayer().symbol} ] Won the Game`
                 break;
             case 2:
                 text = "It's a Draw"
@@ -130,5 +130,22 @@ export const gameController = (() => {
 (() => {
     // let p1 = makeplayer('bob', 'X')
     // let p2 = player('sally', 'O')
+    if ('serviceWorker' in navigator) {
+
+        window.addEventListener('load', () => {
+     
+          navigator.serviceWorker.register('/service-worker.js').then(registration => {
+     
+            console.log('SW registered: ', registration);
+     
+          }).catch(registrationError => {
+     
+            console.log('SW registration failed: ', registrationError);
+     
+          });
+     
+        });
+     
+      }
     gameController.setup();
 })();
